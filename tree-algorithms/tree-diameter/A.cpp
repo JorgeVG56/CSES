@@ -15,37 +15,26 @@ signed main(){
     adj[v - 1].push_back(u - 1);
   }
 
-  vector<int> vis(n); vis[0] = 1;
-  queue<pair<int, int>> q; q.push({0, 0});
-  int lastVisited = -1;
-  while(!q.empty()){
-    auto [u, d] = q.front(); q.pop();
-    lastVisited = u;
+  auto farthest = [&] (int u = 0) -> pair<int, int> {
+    vector<int> vis(n); vis[u] = 1;
+    queue<pair<int, int>> q; q.push({u, 0});
+    pair<int, int> last;
+    while(!q.empty()){
+      last = q.front(); q.pop();
+      auto [u, d] = last;
 
-    for(int & v : adj[u]){
-      if(vis[v]) continue;
-
-      vis[v] = 1;
-      q.push({v, d + 1});
+      for(int & v : adj[u]){
+        if(vis[v]) continue;
+        vis[v] = 1;
+        q.push({v, d + 1});
+      }
     }
-  }
+    return last;
+  };
 
-  vis.assign(n, 0); vis[lastVisited] = 1;
-  q.push({lastVisited, 0});
-  int lastDistance = -1;
-  while(!q.empty()){
-    auto [u, d] = q.front(); q.pop();
-    lastDistance = d;
+  pair<int, int> firstSearch = farthest();
 
-    for(int & v : adj[u]){
-      if(vis[v]) continue;
-
-      vis[v] = 1;
-      q.push({v, d + 1});
-    }
-  }
-
-  cout << lastDistance;
+  cout << farthest(firstSearch.first).second << '\n';
 
   return 0;
 }

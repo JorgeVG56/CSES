@@ -91,17 +91,6 @@ signed main(){
     return res;
   };
 
-  // for(int i = 0; i < n; i++) cout << i << ' '; 
-  // cout << '\n';
-  // for(int i = 0; i < n; i++) cout << parent[i] << ' ';
-  // cout << '\n';
-  // for(int i = 0; i < n; i++) cout << head[i] << ' '; 
-  // cout << '\n';
-  // for(int i = 0; i < n; i++) cout << pos[i] << ' '; 
-  // cout << '\n';
-  // for(int i = 0; i < n; i++) cout << stHLD.query(i, i + 1) << ' '; 
-
-
   for(int i = 0; i < q; i++){
     int type; cin >> type;
 
